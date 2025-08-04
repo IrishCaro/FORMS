@@ -7,3 +7,33 @@ const movies = [
 ];
 
 // Start coding here...
+
+
+
+function topMovieDescription({ title, genre, rating }) {
+  return `${title} (${genre}) - ${rating}`;
+}
+
+const topMovies = movies.filter(movie => movie.rating >= 8).map(topMovieDescription);
+let movieFilter = document.getElementById("top_movie");
+movieFilter.textContent = topMovies.join("  ");
+
+function formatMovie({ title, genre, rating }) {
+  return `${title} (${genre}) - ${rating} ⭐`;
+}
+
+const formattedMovies = movies.map(formatMovie);
+document.getElementById('format_movie').textContent = formattedMovies.join("  ");
+
+function recommend(movie, minRating = 8) {
+  return movie.rating >= minRating;
+}
+
+const recommendedMovies = movies.filter(movie => recommend(movie));
+
+const formatted = recommendedMovies.map(
+  ({ title, genre, rating }) => `${title} (${genre}) - ${rating} ⭐`
+);
+
+const movierecommend = document.getElementById("recommend_movie");
+movierecommend.innerHTML = formatted.join('<br>');
